@@ -3,7 +3,7 @@ pipeline {
         label('terraform')
     }
     environment {
-        AWS_ACCESS_KEY_ID = credentials('AKIAQHAASHGDJZ33TSTV ')
+        AWS_ACCESS_KEY_ID = credentials('AKIAQHAASHGDJZ33TSTV')
         AWS_SECRET_ACCESS_KEY = credentials('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')
     }
 
