@@ -3,8 +3,7 @@ pipeline {
         label('terraform')
     }
     environment {
-        AWS_ACCESS_KEY_ID = credentials('AKIAQHAASHGDJZ33TSTV')
-        AWS_SECRET_ACCESS_KEY = credentials('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')
+        AWS_ACCESS_KEY_ID = credentials('aws-credentials')
     }
 
     options { 
@@ -14,16 +13,23 @@ pipeline {
         timestamps()
     }
     stages {
+        stage('Version') {
+            steps {
+                dir('terraform-app') {
+                    sh 'terraform --version'
+                }
+            }
+        }
         stage('Init') {
             steps {
-                dir('terraform') {
+                dir('terraform-app') {
                     sh 'terraform init'
                 }
             }
         }
         stage('Plan') {
             steps {
-                dir('terraform') {
+                dir('terraform-app') {
                     sh 'terraform plan'
                 }
             }
@@ -37,10 +43,21 @@ pipeline {
                 branch 'main'
              }
             steps {
-                dir('terraform') {
+                dir('terraform-app') {
                     sh 'terraform apply --auto-approve'
                 }
             }
+        }
+    }
+        post {
+        failure {
+            echo "Your pipeline has failed, contact with your administrator"
+        }
+        success {
+            echo "The deployment was done successfully"
+        }
+        always {
+            echo "I hope you like Jenkins"
         }
     }
 }
