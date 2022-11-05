@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'acme-storage-andres'
+        label('s3-bucket-acme')
     }
     environment {
         AWS_ACCESS_KEY_ID = credentials('AKIAQHAASHGDJZ33TSTV')
