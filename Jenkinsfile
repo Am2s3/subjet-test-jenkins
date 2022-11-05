@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label('terraform')
+        label('acme-storage-andres')
     }
     environment {
         AWS_ACCESS_KEY_ID = credentials('AKIAQHAASHGDJZ33TSTV')
